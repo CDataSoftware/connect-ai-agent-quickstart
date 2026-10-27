@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve the Connect AI Gateway demo. Its job is to let anyone see, in their own Connect AI workspace, what changes when an agent's model calls and data access go through CData Connect AI. Before you change anything, check that the README walkthrough still works from a fresh clone.
+Thanks for helping improve the Connect AI Agent Quickstart. Its job is to let anyone see, in their own Connect AI workspace, what changes when an agent's model calls and data access go through CData Connect AI. Before you change anything, check that the README walkthrough still works from a fresh clone.
 
 ## Set up
 

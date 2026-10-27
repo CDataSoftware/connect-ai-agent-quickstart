@@ -281,7 +281,7 @@ def test_suggestions_are_shown_as_text_never_html(page, open_server):
 
 # ---------- branding ----------
 
-REPO = "https://github.com/CDataSoftware/connect-ai-gateway-demo"
+REPO = "https://github.com/CDataSoftware/connect-ai-agent-quickstart"
 
 
 def test_logos_and_fonts_load_offline(page, open_server):

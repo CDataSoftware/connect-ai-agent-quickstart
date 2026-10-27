@@ -4,5 +4,5 @@ contact_links:
     url: https://docs.cloud.cdata.com
     about: Questions about Connect AI itself, such as connections, Toolkits, and tokens.
   - name: Report a security vulnerability
-    url: https://github.com/CDataSoftware/connect-ai-gateway-demo/security/advisories/new
+    url: https://github.com/CDataSoftware/connect-ai-agent-quickstart/security/advisories/new
     about: Report privately. Please don't open a public issue.

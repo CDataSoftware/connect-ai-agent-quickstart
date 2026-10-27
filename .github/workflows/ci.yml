@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:17-alpine
@@ -46,7 +46,7 @@ jobs:
 
   pins:
     name: Pins match requirements.in
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       # setup-uv publishes no moving major tag, so pin the commit (v10.2.0).
@@ -62,7 +62,7 @@ jobs:
 
   docker:
     name: Local dev stack builds
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - name: Validate compose.yaml

@@ -23,7 +23,7 @@ Ignore `../AGENTS.md`. It describes a Mintlify documentation site in the parent 
 | `app/static/index.html` | Single-file chat page; reads `/chat/stream`, polls `/status` for the header pills |
 | `app/static/vendor/` | marked and DOMPurify, copied unmodified from npm; versions, hashes, and licenses in its README |
 | `app/static/brand/` | CData logos, favicon, and DM fonts from the brand kit; sources and rules in its README |
-| `sample-data/` | 50 synthetic customers (SQL and CSV) for the walkthrough; the README's quick start asks about customer 1004 |
+| `sample-data/` | 50 synthetic customers. The quick start has Connect AI read `customers.csv` from its raw GitHub URL on `main`, so renaming or moving that file breaks step 1; `customers.sql` is the Postgres alternative. The README asks about customer 1004 |
 | `compose.yaml`, `Dockerfile`, `.dockerignore` | The local stack (agent plus Postgres) |
 | `requirements.in` → `requirements.txt` | Top-level deps → compiled exact pins |
 | `tests/`, `pytest.ini`, `requirements-dev.*` | Test suite and its pinned dependencies |
@@ -88,6 +88,6 @@ Verified against a live workspace, 2026-10-13 and 2026-10-14 unless noted.
 
 ## Public repo
 
-- The repo URL `CDataSoftware/connect-ai-gateway-demo` is hardcoded in the README clone command, the chat page footer, `REPO` in `tests/test_ui.py`, and `.github/ISSUE_TEMPLATE/config.yml`. Change them together.
+- The repo URL `CDataSoftware/connect-ai-agent-quickstart` is hardcoded in the README clone command, the chat page footer, `REPO` in `tests/test_ui.py`, and `.github/ISSUE_TEMPLATE/config.yml`. Change them together.
 - Private vulnerability reporting, secret scanning, and push protection are on; `SECURITY.md` and the issue chooser link to private reporting.
 - `sample-data/` must stay synthetic: made-up names, random SSNs, and the card networks' published test numbers. The README's walkthrough questions depend on its customer IDs.

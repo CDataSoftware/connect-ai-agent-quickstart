@@ -1,6 +1,8 @@
-# Connect AI Gateway Demo
+# Connect AI Agent Quickstart
 
 A sample AI agent that answers questions about your business data through CData Connect AI, with each layer of governance a configuration change away. Route its model calls through the Connect AI LLM Gateway, limit it to read-only tools, mask sensitive values, and scope its access to the signed-in user, without changing the agent's code.
+
+![The chat page answering a question about a customer, with the SSN and card number masked as XXXX and the SQL query shown under the answer](docs/chat.png)
 
 | Control | Where you set it | What it does |
 | --- | --- | --- |
@@ -11,29 +13,30 @@ A sample AI agent that answers questions about your business data through CData 
 
 ## Before you start
 
-- A CData Connect AI account. A [free trial](https://www.cdata.com/ai/?utm_source=github&utm_medium=readme&utm_campaign=connect-ai&utm_content=connect-ai-gateway-demo) works.
+- A CData Connect AI account. A [free trial](https://www.cdata.com/ai/?utm_source=github&utm_medium=readme&utm_campaign=connect-ai&utm_content=connect-ai-agent-quickstart) works.
 - A Connect AI [personal access token](https://docs.cloud.cdata.com/en/Settings/Personal-Access-Tokens) (**Settings** > **Access Tokens**).
-- An [Anthropic API key](https://console.anthropic.com/settings/keys).
-- A Postgres database Connect AI can reach, such as a free Neon or Supabase project.
+- An [Anthropic API key](https://console.anthropic.com/settings/keys). To use OpenAI instead, set `LLM_MODEL=openai:<model>` and `OPENAI_API_KEY` in `.env`; the gateway takes `OPENAI_BASE_URL` the same way.
 - [Docker](https://docs.docker.com/get-started/get-docker/). On a Mac without Docker Desktop, `brew install colima docker docker-compose && colima start` works.
 
 ## Quick start
 
-### 1. Load the sample data
+### 1. Add the sample data
 
-[`sample-data/customers.sql`](sample-data/customers.sql) holds 50 made-up customers with Social Security numbers and test credit card numbers. Load it into your Postgres database:
+[`sample-data/customers.csv`](sample-data/customers.csv) holds 50 made-up customers with Social Security numbers and test credit card numbers. Connect AI reads it straight from GitHub, so there's no database to set up.
 
-```bash
-git clone https://github.com/CDataSoftware/connect-ai-gateway-demo.git
-cd connect-ai-gateway-demo
-docker run --rm -i postgres:17-alpine psql "postgresql://<user>:<password>@<host>/<database>" < sample-data/customers.sql
+In Connect AI, open **Sources**, add a **CSV** connection named `DemoCustomers`, set **URI** to this URL, and save and test it:
+
+```text
+https://raw.githubusercontent.com/CDataSoftware/connect-ai-agent-quickstart/main/sample-data/customers.csv
 ```
 
-In Connect AI, open **Sources**, add a PostgreSQL connection to that database, and name it `DemoCustomers`.
+To use a database instead, load [`sample-data/customers.sql`](sample-data/customers.sql) into any Postgres that Connect AI can reach and add it as a PostgreSQL connection named `DemoCustomers`.
 
 ### 2. Start the agent
 
 ```bash
+git clone https://github.com/CDataSoftware/connect-ai-agent-quickstart.git
+cd connect-ai-agent-quickstart
 cp .env.example .env    # set CDATA_USERNAME, CDATA_PAT, and ANTHROPIC_API_KEY
 docker compose up
 ```

@@ -23,7 +23,7 @@ services:
 
   agent:
     build: .
-    image: connect-ai-gateway-demo:dev
+    image: connect-ai-agent-quickstart:dev
     env_file: .env
     extra_hosts:
       # Lets a local LLM gateway be reached as host.docker.internal on Linux

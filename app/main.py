@@ -90,7 +90,7 @@ async def lifespan(app: FastAPI):
                     await task
 
 
-app = FastAPI(title="Connect AI Gateway Demo Agent", lifespan=lifespan)
+app = FastAPI(title="Connect AI Agent Quickstart", lifespan=lifespan)
 # The chat page's scripts (vendored, so it needs no CDN).
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
 
