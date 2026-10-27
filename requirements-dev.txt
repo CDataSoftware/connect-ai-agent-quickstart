@@ -4,17 +4,17 @@ colorama==0.4.6 ; sys_platform == 'win32'
     # via pytest
 greenlet==3.5.6
     # via playwright
-iniconfig==2.3.0
+iniconfig==2.3.1
     # via pytest
 packaging==26.3
     # via
     #   -c requirements.txt
     #   pytest
-playwright==1.63.0
+playwright==1.64.1
     # via -r requirements-dev.in
-pluggy==1.6.0
+pluggy==1.7.0
     # via pytest
-pyee==13.0.1
+pyee==14.0.0
     # via playwright
 pygments==2.21.0
     # via pytest

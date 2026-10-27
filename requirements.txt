@@ -4,7 +4,7 @@ annotated-doc==0.0.5
     # via fastapi
 annotated-types==0.8.0
     # via pydantic
-anthropic==1.8.0
+anthropic==1.17.0
     # via langchain-anthropic
 anyio==4.15.1
     # via
@@ -29,17 +29,17 @@ certifi==2026.10.23
     #   requests
 cffi==2.1.1 ; platform_python_implementation != 'PyPy'
     # via cryptography
-charset-normalizer==3.5.1
+charset-normalizer==3.5.2
     # via requests
 click==8.5.0
     # via uvicorn
-cryptography==50.0.1
+cryptography==50.0.2
     # via pyjwt
 distro==1.9.0
     # via langsmith
 docstring-parser==0.18.0
     # via anthropic
-fastapi==0.141.1
+fastapi==0.162.0
     # via -r requirements.in
 h11==0.16.0
     # via
@@ -48,9 +48,9 @@ h11==0.16.0
     #   uvicorn
 httpcore==1.0.9
     # via httpx
-httpcore2==2.13.1 ; sys_platform != 'emscripten'
+httpcore2==2.16.0 ; sys_platform != 'emscripten'
     # via httpx2
-httptools==0.8.0
+httptools==0.9.0
     # via uvicorn
 httpx==0.28.1
     # via
@@ -59,7 +59,7 @@ httpx==0.28.1
     #   mcp
 httpx-sse==0.4.3
     # via mcp
-httpx2==2.13.1
+httpx2==2.16.0
     # via
     #   anthropic
     #   langsmith
@@ -72,23 +72,23 @@ idna==3.20
     #   httpx
     #   httpx2
     #   requests
-jiter==0.17.0
+jiter==0.18.0
     # via
     #   anthropic
     #   openai
-jsonpatch==1.33
+jsonpatch==1.38
     # via langchain-core
-jsonpointer==3.1.1
+jsonpointer==3.6
     # via jsonpatch
 jsonschema==4.26.0
     # via mcp
 jsonschema-specifications==2025.9.1
     # via jsonschema
-langchain==1.4.2
+langchain==1.4.7
     # via -r requirements.in
-langchain-anthropic==1.7.4
+langchain-anthropic==1.7.6
     # via -r requirements.in
-langchain-core==1.6.4
+langchain-core==1.7.0
     # via
     #   langchain
     #   langchain-anthropic
@@ -100,13 +100,13 @@ langchain-core==1.6.4
     #   langgraph-sdk
 langchain-mcp-adapters==0.3.2
     # via -r requirements.in
-langchain-openai==1.6.6
+langchain-openai==1.7.3
     # via -r requirements.in
-langchain-protocol==0.0.19
+langchain-protocol==0.0.20
     # via
     #   langchain-core
     #   langgraph-sdk
-langgraph==1.2.12
+langgraph==1.2.18
     # via
     #   -r requirements.in
     #   langchain
@@ -117,22 +117,26 @@ langgraph-checkpoint==4.3.1
     #   langgraph-prebuilt
 langgraph-checkpoint-postgres==3.2.0
     # via -r requirements.in
-langgraph-prebuilt==1.1.0
+langgraph-prebuilt==1.1.1
     # via langgraph
-langgraph-sdk==0.4.5
+langgraph-sdk==0.4.10
     # via langgraph
-langsmith==0.14.0
+langsmith==0.14.13
     # via langchain-core
 mcp==1.30.0
     # via langchain-mcp-adapters
-openai==3.19.2
+openai==3.40.0
     # via langchain-openai
-orjson==3.12.0
+opentelemetry-api==1.45.1
+    # via
+    #   anthropic
+    #   fastapi
+orjson==3.13.0
     # via
     #   langgraph-checkpoint-postgres
     #   langgraph-sdk
     #   langsmith
-ormsgpack==1.12.2
+ormsgpack==1.13.0
     # via langgraph-checkpoint
 packaging==26.3
     # via
@@ -148,9 +152,9 @@ psycopg-pool==3.3.3
     # via
     #   langgraph-checkpoint-postgres
     #   psycopg
-pycparser==3.0 ; implementation_name != 'PyPy' and platform_python_implementation != 'PyPy'
+pycparser==3.12 ; implementation_name != 'PyPy' and platform_python_implementation != 'PyPy'
     # via cffi
-pydantic==2.13.5
+pydantic==2.14.1
     # via
     #   anthropic
     #   fastapi
@@ -162,13 +166,13 @@ pydantic==2.13.5
     #   mcp
     #   openai
     #   pydantic-settings
-pydantic-core==2.46.5
+pydantic-core==2.50.1
     # via pydantic
-pydantic-settings==2.15.0
+pydantic-settings==2.16.1
     # via mcp
-pyjwt==2.15.0
+pyjwt==2.15.1
     # via mcp
-python-dotenv==1.2.3
+python-dotenv==1.2.4
     # via
     #   pydantic-settings
     #   uvicorn
@@ -184,7 +188,7 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-regex==2026.9.10
+regex==2026.9.29
     # via tiktoken
 requests==2.34.2
     # via
@@ -193,7 +197,7 @@ requests==2.34.2
     #   tiktoken
 requests-toolbelt==1.0.0
     # via langsmith
-rpds-py==2026.6.3
+rpds-py==2026.9.1
     # via
     #   jsonschema
     #   referencing
@@ -202,18 +206,18 @@ sniffio==1.3.1
     #   anthropic
     #   langsmith
     #   openai
-sse-starlette==3.4.11
+sse-starlette==3.6.0
     # via mcp
-starlette==1.7.0
+starlette==1.10.0
     # via
     #   fastapi
     #   mcp
     #   sse-starlette
-tenacity==9.1.4
+tenacity==9.2.1
     # via langchain-core
 tiktoken==0.14.0
     # via langchain-openai
-truststore==0.10.4 ; sys_platform != 'emscripten'
+truststore==0.10.5 ; sys_platform != 'emscripten'
     # via
     #   httpcore2
     #   httpx2
@@ -229,10 +233,12 @@ typing-extensions==4.16.0
     #   langsmith
     #   mcp
     #   openai
+    #   opentelemetry-api
     #   psycopg
     #   psycopg-pool
     #   pydantic
     #   pydantic-core
+    #   pydantic-settings
     #   referencing
     #   starlette
     #   typing-inspection
@@ -242,28 +248,28 @@ typing-inspection==0.4.4
     #   mcp
     #   pydantic
     #   pydantic-settings
-tzdata==2026.4 ; sys_platform == 'win32'
+tzdata==2026.5 ; sys_platform == 'win32'
     # via psycopg
 urllib3==2.8.0
     # via requests
-uuid-utils==0.17.1
+uuid-utils==0.19.0
     # via
     #   langchain-core
     #   langsmith
-uvicorn==0.53.0
+uvicorn==0.54.0
     # via
     #   -r requirements.in
     #   mcp
-uvloop==0.22.1 ; platform_python_implementation != 'PyPy' and sys_platform != 'cygwin' and sys_platform != 'win32'
+uvloop==0.23.0 ; platform_python_implementation != 'PyPy' and sys_platform != 'cygwin' and sys_platform != 'win32'
     # via uvicorn
 watchfiles==1.3.0
     # via uvicorn
-websockets==16.1.1
+websockets==17.3
     # via
     #   langgraph-sdk
     #   langsmith
     #   uvicorn
-xxhash==4.0.1
+xxhash==4.0.2
     # via
     #   langgraph
     #   langsmith
