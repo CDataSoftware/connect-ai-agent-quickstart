@@ -74,6 +74,7 @@ The agent signs in with your PAT, so it gets your access. Open **Sources** > `De
 
 | Problem | Fix |
 | --- | --- |
+| `Startup failed:` in the log | The rest of the line names the setting to fix. Fix `.env`, then run `docker compose restart agent`; changes are only picked up live once the agent has started. |
 | `Connect AI rejected the credentials (HTTP 401)` | `CDATA_USERNAME` must be your login email and `CDATA_PAT` a current token. |
 | `The LLM provider rejected the API key` | The Anthropic key or virtual key is wrong or revoked. |
 | The header shows **Reload failed, see logs** | `docker compose logs agent` shows why the new `.env` didn't load. The previous settings stay active. |
