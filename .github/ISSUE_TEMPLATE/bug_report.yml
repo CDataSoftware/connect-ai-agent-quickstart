@@ -1,5 +1,5 @@
 name: Bug report
-description: Something in the starter doesn't work as documented.
+description: Something in the demo doesn't work as documented.
 labels: [bug]
 body:
   - type: markdown

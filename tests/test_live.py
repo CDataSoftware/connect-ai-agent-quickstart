@@ -5,7 +5,7 @@
 
 Needs CDATA_USERNAME and CDATA_PAT. No LLM is called.
 These pin down behaviour discovered by hand, so a Connect AI or connector
-change that breaks the starter's assumptions shows up here.
+change that breaks the demo's assumptions shows up here.
 """
 import asyncio
 import os

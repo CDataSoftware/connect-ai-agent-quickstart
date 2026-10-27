@@ -55,8 +55,7 @@ services:
       WATCHFILES_FORCE_POLLING: "true"
     volumes:
       - ./app:/code/app
-      # Lets the app watch .env and rebuild the agent when it changes, and
-      # lets the chat page's demo mode run demo/stage.py (see app/live.py).
+      # Lets the app watch .env and rebuild the agent when it changes (see app/live.py).
       - .:/workspace
 
 volumes:

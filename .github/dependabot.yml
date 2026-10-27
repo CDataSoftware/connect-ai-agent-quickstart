@@ -1,0 +1,12 @@
+# Python pins are compiled from requirements.in with uv (see CONTRIBUTING.md),
+# which Dependabot can't do, so it only watches the Actions and the base image.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: monthly

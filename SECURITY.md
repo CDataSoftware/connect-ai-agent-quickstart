@@ -16,9 +16,9 @@ Expect an acknowledgment within five business days. Fixes are merged to `main`.
 
 Problems in this repository's code and configuration, such as:
 
-- Reaching `/chat`, `/tools`, or `/demo/stage` on a reachable service without `APP_API_KEY`
+- Reaching `/chat` or `/tools` on a reachable service without `APP_API_KEY`
 - The chat page rendering attacker-controlled HTML or script
-- Credentials leaking into logs, error messages, API responses, the header, or `demo/stage.py` output
+- Credentials leaking into logs, error messages, API responses, or the header
 - A `compose.yaml` default that exposes a service or secret
 
 ## Out of scope

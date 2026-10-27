@@ -10,7 +10,7 @@
 - [ ] Booted with `docker compose up` and got a real answer in the chat page
 - [ ] Ran the live tests (`RUN_LIVE_TESTS=1 pytest -m live`)
 - [ ] Followed the README's local steps from a fresh clone (setup changes)
-- [ ] Ran the demo stages (`python demo/stage.py direct|gateway|governed`) if you touched `demo/` or `app/live.py`
+- [ ] Saved each step's `.env` change with the app running and watched the header update, if you touched `app/live.py` or `.env.example`
 
 ## Checklist
 

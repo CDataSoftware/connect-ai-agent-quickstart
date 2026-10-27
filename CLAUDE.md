@@ -1,18 +1,18 @@
 # Working in this repo
 
-The demo agent from the developer segment of CData Foundations 2026. A LangGraph agent over CData Connect AI's MCP server, with a chat page, that gets governed live by editing `.env` (LLM Gateway, read-only tools) and flipping console switches (Data Security masking, per-user permissions). The goal is a demo that runs the same way every time, on stage and from a fresh clone; weigh every change against that.
+A public demo that anyone with a Connect AI account can run: a LangGraph agent over CData Connect AI's MCP server, with a chat page, that gets governed live by editing `.env` (LLM Gateway, read-only tools) and flipping console switches (Data Security masking, per-user permissions). The README walks a stranger through it with the sample data in `sample-data/`. Weigh every change against whether that walkthrough still works from a fresh clone.
 
-It was split out of `connect-ai-render-starter` (the Render partnership starter) on 2026-10-26, from its `foundations-gateway-demo` branch. Leave that repo alone: it backs a separate blog partnership. Fixes that apply to both are copied by hand.
+It started as the agent from the developer session at CData Foundations 2026, split out of `connect-ai-render-starter` (the Render partnership starter) on 2026-10-26 from its `foundations-gateway-demo` branch. The presenter tooling (stage script, `/?demo` mode, run of show, spoken script) was removed on 2026-10-27; it's still on that branch if a talk needs it again. Leave that repo alone: it backs a separate blog partnership. Fixes that apply to both are copied by hand.
 
 Ignore `../AGENTS.md`. It describes a Mintlify documentation site in the parent directory, not this project.
 
-`README.md` is the user-facing setup, `CONTRIBUTING.md` the change checklist, and `demo/FOUNDATIONS.md` the run of show and what was verified live. This file holds what none of those makes obvious.
+`README.md` is the user-facing setup and walkthrough, and `CONTRIBUTING.md` the change checklist. This file holds what neither makes obvious.
 
 ## Layout
 
 | Path | Role |
 | --- | --- |
-| `app/main.py` | FastAPI app: startup (Postgres check, agent build, `.env` watcher, retention task), `/chat`, `/chat/stream`, `/status`, `/demo/stage`, `/healthz`, `/tools`, the chat page at `/` |
+| `app/main.py` | FastAPI app: startup (Postgres check, agent build, `.env` watcher, retention task), `/chat`, `/chat/stream`, `/status`, `/healthz`, `/tools`, the chat page at `/` |
 | `app/live.py` | Watches `.env`, rebuilds the agent on change, and describes the live route (gateway or direct, key kind, model, tool scope) for the header |
 | `app/agent.py` | `create_agent` over MCP tools; `TruncateToolOutput` middleware caps tool results |
 | `app/config.py` | Env parsing and validation; `LLM_API_KEYS` maps provider to key variable |
@@ -21,11 +21,9 @@ Ignore `../AGENTS.md`. It describes a Mintlify documentation site in the parent 
 | `app/suggest.py` | One extra LLM call after each streamed answer for three follow-up questions |
 | `app/retention.py` | Deletes conversations idle past `CONVERSATION_RETENTION_DAYS` |
 | `app/static/index.html` | Single-file chat page; reads `/chat/stream`, polls `/status` for the header pills |
-| `app/static/demo.js` | Demo mode (`/?demo`): ⌥ → steps through the scripted questions and console pages |
 | `app/static/vendor/` | marked and DOMPurify, copied unmodified from npm; versions, hashes, and licenses in its README |
 | `app/static/brand/` | CData logos, favicon, and DM fonts from the brand kit; sources and rules in its README |
-| `demo/stage.py` | Rewrites `.env` to the `direct`, `gateway`, or `governed` layout from `.env.foundations`, printing a masked diff |
-| `demo/FOUNDATIONS.md`, `demo/SCRIPT.md` | Run of show and spoken script |
+| `sample-data/` | 50 synthetic customers (SQL and CSV) for the walkthrough; the README's questions name customer 1004 and the top five by lifetime value |
 | `compose.yaml`, `Dockerfile`, `.dockerignore` | The local stack (agent plus Postgres) |
 | `requirements.in` → `requirements.txt` | Top-level deps → compiled exact pins |
 | `tests/`, `pytest.ini`, `requirements-dev.*` | Test suite and its pinned dependencies |
@@ -39,11 +37,10 @@ compose mounts the project at `/workspace`. `app/live.py` polls `/workspace/.env
 - A variable removed from `.env` is removed from `os.environ`, so commenting out `ANTHROPIC_BASE_URL` really sends the next call direct.
 - The header calls the route "Connect AI LLM Gateway" when the base URL's host is `cloud.cdata.com` and its path starts with `/gateway`, and "virtual key" when the key starts with `cgw_`. It never shows a key, only its kind.
 - `/status` reports `served_model`, the model named in the last response's metadata. Through a gateway routing rule it can differ from `LLM_MODEL`.
-- `demo/stage.py` writes `.env` in place (a replaced file would not show through the mount) and masks secrets in everything it prints. The chat page's demo mode runs the same `switch()` through `/demo/stage`.
 
 ## Connect AI facts worth not re-deriving
 
-Verified against a live workspace, 2026-10-13 and 2026-10-14 unless noted. `demo/FOUNDATIONS.md` has the full list with timings.
+Verified against a live workspace, 2026-10-13 and 2026-10-14 unless noted.
 
 - **The gateway URL** `https://cloud.cdata.com/gateway/v1` works with or without `/v1`, from both the Anthropic and OpenAI SDKs. Overhead was about 0.2 s on a small call.
 - **The routing rule decides the model, not the request.** Any model name sent (even a made-up one, or `gpt-4o` from the OpenAI SDK) was served by the rule's first model. `LLM_MODEL` becomes a label.
@@ -81,16 +78,16 @@ Verified against a live workspace, 2026-10-13 and 2026-10-14 unless noted. `demo
 
 ## Conventions
 
-- **Never commit credentials.** `.env` and `.env.*` are gitignored except `.env.example`. `demo/stage.py` and the header mask secrets; keep anything new that prints `.env` masked too.
-- **`APP_API_KEY` is optional.** Empty disables the bearer check on `/chat`, `/tools`, and `/demo/stage`. That's only safe because `compose.yaml` publishes ports on `127.0.0.1`; keep it that way.
+- **Never commit credentials.** `.env` and `.env.*` are gitignored except `.env.example`. The header shows a key's kind, never the key; keep anything new that displays `.env` masked too.
+- **`APP_API_KEY` is optional.** Empty disables the bearer check on `/chat` and `/tools`. That's only safe because `compose.yaml` publishes ports on `127.0.0.1`; keep it that way.
 - **Operator-fixable failures raise `SetupError`** with a message naming the variable to change. Extend `describe_mcp_error` and `describe_llm_error` for new failure modes rather than catching locally.
 - **Model output is hostile.** The page sets every server string with `textContent`; only the reply goes through marked and DOMPurify.
 - **Strip every env var before use**, and keep `.env` comments on their own lines (python-dotenv reads an inline comment after an empty value as the value).
 - **Never hand-edit `requirements.txt`.** The compile command is at the top of `requirements.in`.
 - **Branding:** Agility yellow `#FFE500` is an accent, never text, and only with Depth `#15151C` on it. Navy fills take white text. `test_text_contrast_meets_wcag_aa` fails on a colour change that breaks AA. Rules are in `app/static/brand/README.md`.
 
-## Publishing checklist
+## Public repo
 
-- The repo URL `CDataSoftware/connect-ai-gateway-demo` is hardcoded in the README clone command, the chat page footer, `REPO` in `tests/test_ui.py`, `.github/ISSUE_TEMPLATE/config.yml`, and `demo/SCRIPT.md`. Change them together.
-- Enable GitHub private vulnerability reporting; `SECURITY.md` and the issue chooser link to it.
-- After the talk, delete the demo's gateway project, routing rule, and virtual key, and revoke the PAT and Anthropic key used on stage.
+- The repo URL `CDataSoftware/connect-ai-gateway-demo` is hardcoded in the README clone command, the chat page footer, `REPO` in `tests/test_ui.py`, and `.github/ISSUE_TEMPLATE/config.yml`. Change them together.
+- Private vulnerability reporting, secret scanning, and push protection are on; `SECURITY.md` and the issue chooser link to private reporting.
+- `sample-data/` must stay synthetic: made-up names, random SSNs, and the card networks' published test numbers. The README's walkthrough questions depend on its customer IDs.

@@ -166,20 +166,6 @@ async def status(request: Request):
     }
 
 
-class StageRequest(BaseModel):
-    stage: str
-
-
-@app.post("/demo/stage", dependencies=[Depends(require_api_key)])
-async def demo_stage(body: StageRequest):
-    """Switch .env to a demo act (see demo/stage.py); the watcher reloads it."""
-    try:
-        diff, env = live.switch_stage(body.stage)
-    except (ValueError, FileNotFoundError) as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from None
-    return {"stage": body.stage, "diff": diff, "env": env}
-
-
 def _note_served_model(request: Request, message) -> None:
     # The model that answered, which a gateway routing rule can make differ
     # from the one the app asked for.
