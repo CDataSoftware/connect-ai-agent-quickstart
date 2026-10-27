@@ -2,7 +2,7 @@
 
 A sample AI agent that answers questions about your business data through CData Connect AI, with each layer of governance a configuration change away. Route its model calls through the Connect AI LLM Gateway, limit it to read-only tools, mask sensitive values, and scope its access to the signed-in user, without changing the agent's code.
 
-![The chat page answering a question about a customer, with the SSN and card number masked as XXXX and the SQL query shown under the answer](docs/chat.png)
+![The chat page routed through the Connect AI LLM Gateway with a virtual key, answering a question about a customer with the SSN and card number masked as XXXX and the SQL query under the answer](docs/chat.png)
 
 | Control | Where you set it | What it does |
 | --- | --- | --- |
