@@ -23,7 +23,7 @@ Ignore `../AGENTS.md`. It describes a Mintlify documentation site in the parent 
 | `app/static/index.html` | Single-file chat page; reads `/chat/stream`, polls `/status` for the header pills |
 | `app/static/vendor/` | marked and DOMPurify, copied unmodified from npm; versions, hashes, and licenses in its README |
 | `app/static/brand/` | CData logos, favicon, and DM fonts from the brand kit; sources and rules in its README |
-| `sample-data/` | 50 synthetic customers (SQL and CSV) for the walkthrough; the README's questions name customer 1004 and the top five by lifetime value |
+| `sample-data/` | 50 synthetic customers (SQL and CSV) for the walkthrough; the README's quick start asks about customer 1004 |
 | `compose.yaml`, `Dockerfile`, `.dockerignore` | The local stack (agent plus Postgres) |
 | `requirements.in` → `requirements.txt` | Top-level deps → compiled exact pins |
 | `tests/`, `pytest.ini`, `requirements-dev.*` | Test suite and its pinned dependencies |

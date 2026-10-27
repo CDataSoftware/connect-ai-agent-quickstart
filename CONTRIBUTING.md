@@ -4,7 +4,7 @@ Thanks for helping improve the Connect AI Gateway demo. Its job is to let anyone
 
 ## Set up
 
-Follow [Run it](README.md#run-it) in the README:
+Follow the [Quick start](README.md#quick-start) in the README:
 
 ```bash
 cp .env.example .env    # set CDATA_USERNAME, CDATA_PAT, and ANTHROPIC_API_KEY
