@@ -69,6 +69,13 @@ def apply_env(values: dict, previous_keys: set[str]) -> set[str]:
     return set(values)
 
 
+def load_workspace_env() -> None:
+    """Apply the mounted .env at startup. compose reads env_file only when it
+    creates the container, so without this a restart keeps the old values."""
+    if ENV_FILE.exists():
+        apply_env(dotenv_values(ENV_FILE), set())
+
+
 async def rebuild(app, checkpointer) -> None:
     """Swap in an agent built from the current environment, or keep the old one."""
     try:

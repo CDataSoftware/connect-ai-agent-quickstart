@@ -32,7 +32,7 @@ Problems in this repository's code and configuration, such as:
 Revoke it first, then clean up:
 
 - **Connect AI PAT:** delete it under **Settings** > **Access Tokens** in Connect AI, create a new one, and update `CDATA_PAT` in `.env`.
-- **LLM Gateway virtual key:** revoke it on the project's **Virtual Keys** tab and issue a new one. The provider key behind it stays private.
+- **LLM Gateway virtual key:** revoke it on the **Routing** page's **Virtual Keys** tab and issue a new one. The provider key behind it stays private.
 - **LLM provider key:** revoke it in your provider's console.
 
 Treat a key that appeared in a screen recording or screenshot as leaked. Removing a secret from git history or blurring it in a video edit doesn't un-leak it. Revoke anything you published.

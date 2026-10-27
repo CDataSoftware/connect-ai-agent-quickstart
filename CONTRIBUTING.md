@@ -7,11 +7,11 @@ Thanks for helping improve the Connect AI Agent Quickstart. Its job is to let an
 Follow the [Quick start](README.md#quick-start) in the README:
 
 ```bash
-cp .env.example .env    # set CDATA_USERNAME, CDATA_PAT, and ANTHROPIC_API_KEY
+cp .env.example .env    # set CDATA_USERNAME, CDATA_PAT, and the virtual key in ANTHROPIC_API_KEY
 docker compose up       # http://localhost:8000, reloads on edits under app/ and .env
 ```
 
-Use a sandbox Connect AI workspace. With the default MCP endpoint, the agent can query every connection your PAT can see, and query results go to your LLM provider.
+Use a sandbox Connect AI workspace. With the default MCP endpoint, the agent can query every connection your PAT can see, and query results go to the model your gateway project routes to.
 
 ## Making a change
 
@@ -57,7 +57,7 @@ RUN_LIVE_TESTS=1 .venv/bin/pytest -m live
 ### Check by hand
 
 - [ ] **It boots:** `docker compose up` logs `Loaded N tools` and `Live reload on`, and `curl localhost:8000/healthz` reports `mcp_tools` above 0.
-- [ ] **The swap works** if you touched `app/live.py` or `.env.example`: switch to the gateway lines in `.env`, save, and watch the header's LLM pill change with no restart.
+- [ ] **Live reload works** if you touched `app/live.py` or `.env.example`: uncomment `CDATA_MCP_URL` in `.env`, save, and watch **Tools** in the header drop to six with no restart.
 - [ ] **The chat page looks right** in a browser if you touched `app/static/`. The tests check behaviour, not appearance.
 
 ## Documentation

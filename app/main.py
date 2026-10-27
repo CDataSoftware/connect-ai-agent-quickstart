@@ -50,13 +50,14 @@ async def _check_database(url: str) -> None:
 
 def _startup_failed(exc: SetupError) -> None:
     # The .env watcher only starts after a good startup, so a fix to .env
-    # isn't picked up until the agent restarts. Say so.
+    # isn't picked up until the agent restarts (which rereads .env). Say so.
     hint = " Fix .env, then run `docker compose restart agent`." if live.ENV_FILE.exists() else ""
     log.error("Startup failed: %s%s", exc, hint)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    live.load_workspace_env()
     try:
         settings = load_settings()
         await _check_database(settings.database_url)

@@ -52,6 +52,19 @@ def test_apply_env_sets_and_unsets_but_leaves_pinned(monkeypatch):
     monkeypatch.delenv("LLM_MODEL")
 
 
+def test_startup_rereads_env_file(monkeypatch, tmp_path):
+    # A restart keeps compose's env_file values from container creation, so
+    # startup must apply the edited file itself.
+    env_file = tmp_path / ".env"
+    env_file.write_text("CDATA_PAT=fixed\nDATABASE_URL=postgresql://localhost/agent\n")
+    monkeypatch.setattr(live, "ENV_FILE", env_file)
+    monkeypatch.setenv("CDATA_PAT", "stale")
+    monkeypatch.setenv("DATABASE_URL", "postgresql://db/agent")
+    live.load_workspace_env()
+    assert os.environ["CDATA_PAT"] == "fixed"
+    assert os.environ["DATABASE_URL"] == "postgresql://db/agent"
+
+
 def test_status_reports_route_and_served_model(make_client):
     client = make_client(llm_model="anthropic:claude-sonnet-5-5")
     body = client.get("/status").json()
