@@ -2,7 +2,7 @@
 
 A public demo that anyone with a Connect AI account can run: a LangGraph agent over CData Connect AI's MCP server, with a chat page, that gets governed live by editing `.env` (LLM Gateway, read-only tools) and flipping console switches (Data Security masking, per-user permissions). The README walks a stranger through it with the sample data in `sample-data/`. Weigh every change against whether that walkthrough still works from a fresh clone.
 
-It started as the agent from the developer session at CData Foundations 2026, split out of `connect-ai-render-starter` (the Render partnership starter) on 2026-10-26 from its `foundations-gateway-demo` branch. The presenter tooling (stage script, `/?demo` mode, run of show, spoken script) was removed on 2026-10-27; it's still on that branch if a talk needs it again. Leave that repo alone: it backs a separate blog partnership. Fixes that apply to both are copied by hand.
+It started as the agent from the developer session at CData Foundations 2026, split out of `connect-ai-render-starter` (the Render partnership starter) on 2026-10-26 from its `foundations-gateway-demo` branch. The presenter tooling (stage script, `/?demo` mode, run of show, spoken script) lives on this repo's `foundations-demo` branch; `main` stays a getting-started guide for anyone setting up Connect AI with a chat interface. Fixes to shared code go on `main` first, then get cherry-picked to `foundations-demo` when the demo needs them. Leave that repo alone: it backs a separate blog partnership. Fixes that apply to both are copied by hand.
 
 Ignore `../AGENTS.md`. It describes a Mintlify documentation site in the parent directory, not this project.
 
