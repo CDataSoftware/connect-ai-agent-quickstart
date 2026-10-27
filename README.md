@@ -24,13 +24,13 @@ A sample AI agent that answers questions about your business data through CData 
 
 [`sample-data/customers.csv`](sample-data/customers.csv) holds 50 made-up customers with Social Security numbers and test credit card numbers. Connect AI reads it straight from GitHub, so there's no database to set up.
 
-In Connect AI, open **Sources**, add a **CSV** connection named `DemoCustomers`, set **URI** to this URL, and save and test it:
+In Connect AI, open **Sources**, add a **CSV** connection named `DemoCustomers`, set **URI** to this URL, change **Connection Type** to **HTTPS** (it defaults to Amazon S3), and click **Save & Test**:
 
 ```text
 https://raw.githubusercontent.com/CDataSoftware/connect-ai-agent-quickstart/main/sample-data/customers.csv
 ```
 
-To use a database instead, load [`sample-data/customers.sql`](sample-data/customers.sql) into any Postgres that Connect AI can reach and add it as a PostgreSQL connection named `DemoCustomers`.
+Connect AI names the table `streamedtable`. To use a database instead, load [`sample-data/customers.sql`](sample-data/customers.sql) into any Postgres that Connect AI can reach and add it as a PostgreSQL connection named `DemoCustomers`.
 
 ### 2. Start the agent
 
@@ -43,9 +43,9 @@ docker compose up
 
 Open <http://localhost:8000> and ask:
 
-> Select the customer ID, full name, SSN, and credit card from the customers table in DemoCustomers for customer 1004, and show me exactly what the query returns.
+> Select the customer ID, full name, SSN, and credit card for customer 1004 in DemoCustomers, and show me exactly what the query returns.
 
-The agent returns the full SSN and card number. Click **Tools** in the header: it has 13, including three that write data.
+The agent returns the full SSN and card number (unless your workspace already has Data Security rules on). Click **Tools** in the header: it has 13, including three that write data.
 
 Leave the agent running. It picks up `.env` changes within a second.
 
