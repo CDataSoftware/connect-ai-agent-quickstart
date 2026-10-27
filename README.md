@@ -51,9 +51,9 @@ Leave the agent running. It picks up `.env` changes within a second.
 
 ### 3. Route model calls through the LLM Gateway
 
-1. In Connect AI, add your Anthropic key as an LLM Gateway provider.
-2. Create a routing rule, then a project that uses it with a monthly budget.
-3. On the project's **Virtual Keys** tab, create a key (it starts with `cgw_`).
+1. In Connect AI, open **LLM Providers** and add your Anthropic key.
+2. Open **Routing**. On the **Routing Rules** tab, create a rule, then on the **Projects** tab, create a project that uses it with a monthly budget.
+3. On the **Virtual Keys** tab, click **Issue Virtual Key** for that project. The key starts with `cgw_`.
 4. In `.env`, comment out the first `ANTHROPIC_API_KEY`, uncomment `ANTHROPIC_BASE_URL` and the second `ANTHROPIC_API_KEY`, and paste the virtual key.
 
 Ask the question again, then open **Logs** > **LLM Logs** in Connect AI to see the call with its tokens, cost, and model.
