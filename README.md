@@ -15,9 +15,12 @@ A sample AI agent that answers questions about your business data through CData 
 
 - A CData Connect AI account. A [free trial](https://www.cdata.com/ai/?utm_source=github&utm_medium=readme&utm_campaign=connect-ai&utm_content=connect-ai-agent-quickstart) works.
 - A Connect AI [personal access token](https://docs.cloud.cdata.com/en/Settings/Personal-Access-Tokens) (**Settings** > **Access Tokens**).
+- Access to the [LLM Gateway](https://docs.cloud.cdata.com/en/LLM-Gateway), which is in [early access](https://www.cdata.com/ai/gateway-early-access/). Request it before you start.
+- A model provider registered in the gateway. If your workspace doesn't have one, an Administrator adds it once on **LLM Providers** with the provider's API key (for example, an Anthropic key). Creating routing rules, projects, and virtual keys takes Workspace Administrator.
 - [Docker](https://docs.docker.com/get-started/get-docker/). On a Mac without Docker Desktop, `brew install colima docker docker-compose && colima start` works.
+- For the data masking step only: [Data Security](https://docs.cloud.cdata.com/en/Data-Security), which is part of the Business plan.
 
-You don't need a model provider key. The agent's model calls go through the Connect AI LLM Gateway with a virtual key.
+The agent never holds a model provider key. Its model calls go through the Connect AI LLM Gateway with a virtual key, and the provider key stays in Connect AI.
 
 ## Quick start
 
@@ -33,7 +36,12 @@ https://raw.githubusercontent.com/CDataSoftware/connect-ai-agent-quickstart/main
 
 ### 2. Get a virtual key
 
-In Connect AI, open **Routing**, go to the **Virtual Keys** tab, and click **Issue Virtual Key** for a project. The key starts with `cgw_`. If there's no project yet, create one on the **Projects** tab; its routing rule decides which model answers.
+In Connect AI, open **Routing**:
+
+1. If the workspace has no model provider yet, register one on [**LLM Providers**](https://docs.cloud.cdata.com/en/LLM-Gateway/LLM-Providers) with your provider's API key and at least one model.
+2. On the **Routing Rules** tab, add a **Single provider** rule for that model, or use the workspace default rule.
+3. On the **Projects** tab, create a project and assign the rule. The rule decides which model answers.
+4. On the **Virtual Keys** tab, click **Issue Virtual Key** for the project. The key starts with `cgw_` and is shown once.
 
 ### 3. Start the agent
 
@@ -74,6 +82,7 @@ The agent picks up `.env` changes within a second, so you can add each control w
 | `The LLM provider rejected the API key` | The virtual key is wrong or revoked. Issue a new one on **Routing** > **Virtual Keys**. |
 | The header shows **Reload failed, see logs** | `docker compose logs agent` shows why the new `.env` didn't load. The previous settings stay active. |
 | The agent won't query the SSN or card columns | Ask for the exact query and its raw result, as in step 4. |
+| `docker: unknown command: docker compose` (Homebrew on a Mac) | Follow the setup note Homebrew printed when it installed docker-compose, or run `docker-compose up` instead. |
 | `port is already allocated` | Set `AGENT_PORT` or `DB_PORT` in `.env`. |
 
 To change the code or run the tests, see [CONTRIBUTING.md](CONTRIBUTING.md).
