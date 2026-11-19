@@ -62,7 +62,7 @@ RUN_LIVE_TESTS=1 .venv/bin/pytest -m live
 
 ## Documentation
 
-Update the docs in the same pull request: `README.md` for anything a user sees (including the walkthrough), and `CLAUDE.md` for anything a maintainer would otherwise rediscover the hard way.
+Update the docs in the same pull request: `README.md` for anything a user sees (including the walkthrough), and `CLAUDE.md` (or the matching `.claude/rules/` file) for anything a maintainer would otherwise rediscover the hard way.
 
 ## Reporting a security issue
 

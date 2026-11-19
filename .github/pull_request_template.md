@@ -16,5 +16,5 @@
 
 - [ ] No credentials in the diff, including `.env` values in examples or logs
 - [ ] README updated for anything a user sees, including new error messages
-- [ ] CLAUDE.md updated for any quirk a maintainer would otherwise rediscover
+- [ ] CLAUDE.md or `.claude/rules/` updated for any quirk a maintainer would otherwise rediscover
 - [ ] `requirements*.txt` regenerated from the `.in` files, if dependencies changed
